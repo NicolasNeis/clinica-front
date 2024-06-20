@@ -1,20 +1,19 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
-import axios from 'axios'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import vuetify from './plugins/vuetify';
+import { loadFonts } from './plugins/webfontloader';
+import axiosInstance from '@/plugins/axios';
 
-loadFonts()
+loadFonts();
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL
+const app = createApp(App);
 
-const app = createApp(App)
-.use(router)
-.use(store)
-.use(vuetify)
+app.config.globalProperties.$axios = axiosInstance;
 
-app.config.globalProperties.axios=axios
+app.use(router);
+app.use(store);
+app.use(vuetify);
 
-app.mount('#app')
+app.mount('#app');
