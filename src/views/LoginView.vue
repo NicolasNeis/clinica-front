@@ -56,7 +56,7 @@ export default defineComponent({
         const response = await this.$store.dispatch('user/login')
         if (response) {
           this.buttonLoading = false
-          this.$router.push('/home')
+          this.$router.push({name: 'home'})
         }
         this.buttonLoading = false
       }
@@ -67,7 +67,7 @@ export default defineComponent({
         const response = await this.$store.dispatch('user/signIn')
         if (response) {
           this.buttonLoading = false
-          this.$router.push('/home')
+          this.$router.push({name: 'home'})
         }
         this.buttonLoading = false
       }

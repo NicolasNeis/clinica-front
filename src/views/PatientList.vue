@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="d-flex justify-left w-100">
-            <v-btn @click="$router.push('home')" style="border-radius: 13px" width="100" class="ml-10 mb-4 mt-n4" flat>
+            <v-btn @click="$router.push({name: 'home'})" style="border-radius: 13px" width="100" class="ml-10 mb-4 mt-n4" flat>
                 Menu
             </v-btn>
             <v-btn style="border-radius: 13px" class="ml-10 mb-4 mt-n4" flat

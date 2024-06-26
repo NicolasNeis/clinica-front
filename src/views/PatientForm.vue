@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <v-btn @click="$router.push('home')" style="border-radius: 13px" width="100"
+    <v-btn @click="$router.push({name: 'home'})" style="border-radius: 13px" width="100"
       class="ml-10 mb-4 mt-n4 align-self-start" flat>
       Menu
     </v-btn>
