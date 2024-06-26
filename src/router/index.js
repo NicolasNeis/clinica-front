@@ -1,28 +1,53 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
-import PatientView from '../views/PatientView.vue'
-import store from '../store'
+import HomeView from '../views/HomeView.vue'
+import PatientForm from '../views/PatientForm.vue'
+import DoctorForm from '../views/DoctorForm.vue'
+import PatientList from '../views/PatientList.vue'
+import DoctorList from '../views/DoctorList.vue'
+import EmployeeList from '../views/EmployeeList.vue'
+import EmployeeForm from '../views/EmployeeForm.vue'
 
 const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('../views/HomeView.vue'),
+    component: HomeView,
   },
   {
-    path: '/:pathMatch(.*)*',
+    path: '/login',
     name: 'login',
     component: LoginView
   },
   {
-    path: '/patient',
+    path: '/patient/:patientId?',
     name: 'patient',
-    component: PatientView
+    component: PatientForm
   },
   {
-    path: '/doctor',
+    path: '/doctor/:doctorId?',
     name: 'doctor',
-    component: () => import('../views/DoctorView.vue'),
+    component: DoctorForm,
+  },
+  {
+    path: '/patients',
+    name: 'patients',
+    component: PatientList
+  },
+  {
+    path: '/doctors',
+    name: 'doctors',
+    component: DoctorList,
+  },
+  {
+    path: '/employees',
+    name: 'employees',
+    component: EmployeeList,
+  },
+  {
+    path: '/employee/:employeeId?',
+    name: 'employee',
+    component: EmployeeForm,
   },
 ]
 
@@ -32,22 +57,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (localStorage.getItem("token") == null) {
-      next({
-        path: "/login",
-        params: { nextUrl: to.fullPath },
-      });
-  } else {
-      if (!store.modules.root.state.user.isAuthenticated) {
-        next({
-          path: "/login",
-          params: { nextUrl: to.fullPath },
-        });
-      } else {
-        next();
-      }
-    }
+  if (to.name === "login") {
+    next()
+    return
+  }
+
+  if (localStorage.getItem("token") == null) {
+    next({
+      path: "/login",
+      params: { nextUrl: to.fullPath },
+    });
   } else {
     next();
   }

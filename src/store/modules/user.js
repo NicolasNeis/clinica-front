@@ -5,44 +5,87 @@ export default {
   state: {
     user: {
       userName: null,
-      password: null
+      password: null,
+      role: 0
     },
     isAuthenticated: false,
-    isRegister: false
+    isRegister: false,
+    lstUsers: [],
   },
   getters: {},
   actions: {
-    async login({ commit, state }) { 
+    async listAll(store) {
       try {
-        const response = await axiosConfig.post(`/api/login`, {
-          userName: state.user.userName,
-          password: state.user.password,
-          role: "admin",
-          id: 1
-        });
-        localStorage.setItem('token', response.data.token);
-        commit('setAuthenticated', true);
-        return response;
+          const response = await axiosConfig.get(`api/employee`)
+
+          store.state.lstUsers = response.data
+          return response
       } catch (error) {
-        return false;
+          return false
+      }
+  },
+    async login(store) {
+      try {
+        const response = await axiosConfig.post(`/api/login`, { userName: store.state.userName, password: store.state.password })
+        localStorage.setItem('token', response.data.token)
+        axiosConfig.defaults.headers.common["authorization"] = response.data.token;
+        store.state.isAuthenticated = true
+        return true
+      }
+      catch (error) {
+        return false
+      }
+
+    },
+    async getEmployee(store, id) {
+      try {
+        const response = await axiosConfig.get(`/api/employee/${id}`)
+        store.state.user = response.data
+        return true
+      } catch (error) {
+        return false
       }
     },
-    async signIn({ commit, state }) {
+    async signIn(store) {
       try {
-        const response = await axiosConfig.post('/register', {
-          userName: state.user.userName,
-          password: state.user.password
-        });
-        localStorage.setItem('token', response.data.token);
-        commit('setAuthenticated', true);
-        return true;
-      } catch (error) {
-        return false;
+        const response = await axiosConfig.post('/register', { userName: store.state.userName, password: store.state.password })
+        localStorage.setItem('token', response.data.token)
+        store.state.isAuthenticated = true
+        return true
+      }
+      catch (error) {
+        return false
       }
     },
-    logout({ commit }) {
-      localStorage.removeItem('token');
-      commit('setAuthenticated', false);
+    async logout(store) {
+      localStorage.removeItem('token')
+      store.state.isAuthenticated = false
+    },
+    async addEmployee(store) {
+      try {
+        await axiosConfig.post(`/api/employee/`, store.state.user)
+        store.state.user = {
+          userName: null,
+          password: null,
+          role: 0
+        }
+        return true
+      } catch (error) {
+        return false
+      }
+    },
+    async updateEmployee(store) {
+      try {
+        await axiosConfig.put(`/api/employee/${store.state.user.id}`, store.state.user)
+        store.state.user = {
+          userName: null,
+          password: null,
+          role: 0
+        }
+        return true
+      } catch (error) {
+        return false
+      }
     }
   },
   mutations: {
