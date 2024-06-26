@@ -15,8 +15,6 @@
                 {{ !user.id ? "Cadastro Funcionário" : "Visualização Funcionário" }}
             </div>
             <div class="mx-16">
-                <v-text-field label="Nome Completo" class="mt-10 mb-n3" variant="outlined"
-                    density="compact"></v-text-field>
                 <v-text-field v-model="user.id" label="ID" class="mb-n3" variant="outlined" :disabled="routeId"
                     density="compact"></v-text-field>
                 <v-text-field v-model="user.userName" label="Nome" class="mb-n3" variant="outlined"
