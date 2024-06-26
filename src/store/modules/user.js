@@ -16,14 +16,14 @@ export default {
   actions: {
     async listAll(store) {
       try {
-          const response = await axiosConfig.get(`api/employee`)
+        const response = await axiosConfig.get(`api/employee`)
 
-          store.state.lstUsers = response.data
-          return response
+        store.state.lstUsers = response.data
+        return response
       } catch (error) {
-          return false
+        return false
       }
-  },
+    },
     async login(store) {
       try {
         const response = await axiosConfig.post(`/api/login`, { userName: store.state.userName, password: store.state.password })
@@ -86,7 +86,16 @@ export default {
       } catch (error) {
         return false
       }
-    }
+    },
+    async deleteEmployee(store, id) {
+      try {
+        await axiosConfig.delete(`/api/employee/${id}`)
+        await store.dispatch("listAll")
+        return true
+      } catch (error) {
+        return false
+      }
+    },
   },
   mutations: {
     setAuthenticated(state, isAuthenticated) {

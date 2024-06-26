@@ -10,7 +10,16 @@
             </v-btn>
         </div>
         <v-card width="95%" height="85%" color="white" class="mx-auto">
-            <v-data-table :items="lstUsers" :headers="headers"></v-data-table>
+            <v-data-table :items="lstUsers" :headers="headers">
+                <template v-slot:[`item.actions`]="{ item }">
+                    <v-icon class="me-2" size="small" @click="$router.push(`/employee/${item.id}`)">
+                        mdi-pencil
+                    </v-icon>
+                    <v-icon size="small" @click="deleteEmployee(item.id)">
+                        mdi-delete
+                    </v-icon>
+                </template>
+            </v-data-table>
         </v-card>
     </div>
 </template>
@@ -30,6 +39,7 @@ export default defineComponent({
                 key: 'role',
                 value: item => item.role == 1 ? "Sim" : "Não",
             },
+            { title: 'Ações', key: 'actions', sortable: false },
         ]
     }),
     computed: {
@@ -37,6 +47,7 @@ export default defineComponent({
     },
     methods: {
         ...mapActions('user', ['listAll']),
+        ...mapActions('user', ['deleteEmployee']),
     },
     async mounted() {
         await this.listAll();

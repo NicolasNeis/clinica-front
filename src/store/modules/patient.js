@@ -52,6 +52,15 @@ export default {
                 return false
             }
         },
+        async deletePatient(store, id) {
+            try {
+                await axiosConfig.delete(`/api/patient/${id}`)
+                await store.dispatch("listAll")
+                return true
+            } catch (error) {
+                return false
+            }
+        },
     },
     mutations: {
     }

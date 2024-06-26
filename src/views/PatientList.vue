@@ -10,7 +10,16 @@
             </v-btn>
         </div>
         <v-card width="95%" height="85%" color="white" class="mx-auto">
-            <v-data-table :items="lstPatient" :headers="headers"></v-data-table>
+            <v-data-table :items="lstPatient" :headers="headers">
+                <template v-slot:[`item.actions`]="{ item }">
+                    <v-icon class="me-2" size="small" @click="$router.push(`/patient/${item.id}`)">
+                        mdi-pencil
+                    </v-icon>
+                    <v-icon size="small" @click="deletePatient(item.id)">
+                        mdi-delete
+                    </v-icon>
+                </template>
+            </v-data-table>
         </v-card>
     </div>
 </template>
@@ -25,9 +34,10 @@ export default defineComponent({
         headers: [
             { title: 'ID', value: 'id' },
             { title: 'Nome', value: 'name' },
-            { title: 'Data de Nascimento', key: 'dateOfBirth'},
+            { title: 'Data de Nascimento', key: 'dateOfBirth' },
             { title: 'Telefone', value: 'phone' },
-            { title: 'CPF', value: 'cpf' }
+            { title: 'CPF', value: 'cpf' },
+            { title: 'Ações', key: 'actions', sortable: false },
         ]
     }),
     computed: {
@@ -35,6 +45,8 @@ export default defineComponent({
     },
     methods: {
         ...mapActions('patient', ['listAll']),
+        ...mapActions('patient', ['deletePatient']),
+
     },
     async mounted() {
         await this.listAll();
