@@ -1,29 +1,25 @@
 <template>
-    <div class="container">
-        <div class="d-flex justify-left w-100">
-            <v-btn @click="$router.push({name: 'home'})" style="border-radius: 13px" width="100" class="ml-10 mb-4 mt-n4" flat>
-                Menu
-            </v-btn>
-            <v-btn style="border-radius: 13px" class="ml-10 mb-4 mt-n4" flat
+    <v-card width="100%" height="100%" color="white" class="mx-auto" elevation="0">
+        <div class="d-flex pa-3">
+            <v-spacer></v-spacer>
+            <v-btn 
                 @click="this.$router.push({ name: 'patient' });">
+                <v-icon>mdi-plus</v-icon>
                 Novo Paciente
             </v-btn>
         </div>
-        <v-card width="95%" height="85%" color="white" class="mx-auto">
-            <v-data-table :items="lstPatient" :headers="headers">
-                <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon class="me-2" size="small" @click="$router.push(`/patient/${item.id}`)">
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon size="small" @click="deletePatient(item.id)">
-                        mdi-delete
-                    </v-icon>
-                </template>
-            </v-data-table>
-        </v-card>
-    </div>
+        <v-data-table :items="lstPatient" :headers="headers">
+            <template v-slot:[`item.actions`]="{ item }">
+                <v-icon class="me-2" size="small" @click="$router.push(`/patient/${item.id}`)">
+                    mdi-pencil
+                </v-icon>
+                <v-icon size="small" @click="deletePatient(item.id)">
+                    mdi-delete
+                </v-icon>
+            </template>
+        </v-data-table>
+    </v-card>
 </template>
-
 <script>
 import { defineComponent } from "vue";
 import { mapState, mapActions } from 'vuex';

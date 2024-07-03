@@ -1,12 +1,8 @@
 <template>
-  <div class="container">
-    <v-btn @click="$router.push({name: 'home'})" style="border-radius: 13px" width="100"
-      class="ml-10 mb-4 mt-n4 align-self-start" flat>
-      Menu
-    </v-btn>
-    <v-card width="95%" height="85%" color="white" class="mx-auto" style="border-radius: 10px">
+    <v-card width="100%" height="100%" color="white" class="mx-auto" style="border-radius: 10px">
       <div class="d-flex justify-center pa-3" style="background-color: #ecf0f1; font-size: 30px">
-        Cadastro Paciente
+        <v-btn icon="mdi-arrow-left" variant="text" class="position-absolute" style="left: 20px;" @click="$router.go(-1)"></v-btn>
+        {{ !patient.id ? "Cadastro Paciente" : "Visualização Paciente" }}
       </div>
       <div class="mx-16">
         <v-text-field v-model="patient.id" label="Nome Completo" class="mt-10 mb-n3" variant="outlined" :disabled="routeId"
@@ -28,7 +24,6 @@
       </div>
 
     </v-card>
-  </div>
 </template>
 
 <script>
@@ -65,13 +60,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  background-color: #58af9b;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 </style>

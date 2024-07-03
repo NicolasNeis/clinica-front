@@ -7,48 +7,47 @@ import PatientList from '../views/PatientList.vue'
 import DoctorList from '../views/DoctorList.vue'
 import EmployeeList from '../views/EmployeeList.vue'
 import EmployeeForm from '../views/EmployeeForm.vue'
-import SnackBar from '@/views/SnackBar.vue'
 
 const routes = [
   {
     path: '/home',
     name: 'home',
-    component: { HomeView, SnackBar }
+    component: HomeView
   },
   {
     path: '/login',
     name: 'login',
-    component: { LoginView, SnackBar }
+    component: LoginView
   },
   {
     path: '/patient/:patientId?',
     name: 'patient',
-    component: { PatientForm, SnackBar }
+    component: PatientForm
   },
   {
     path: '/doctor/:doctorId?',
     name: 'doctor',
-    component: { DoctorForm, SnackBar }
+    component: DoctorForm
   },
   {
     path: '/patients',
     name: 'patients',
-    component: { PatientList, SnackBar }
+    component: PatientList
   },
   {
     path: '/doctors',
     name: 'doctors',
-    component: { DoctorList, SnackBar }
+    component: DoctorList
   },
   {
     path: '/employees',
     name: 'employees',
-    component: { EmployeeList, SnackBar }
+    component: EmployeeList
   },
   {
     path: '/employee/:employeeId?',
     name: 'employee',
-    component: { EmployeeForm, SnackBar }
+    component: EmployeeForm
   },
 ]
 

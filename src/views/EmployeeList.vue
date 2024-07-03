@@ -1,28 +1,26 @@
 <template>
-    <div class="container">
-        <div class="d-flex justify-left w-100">
-            <v-btn @click="$router.push({name: 'home'})" style="border-radius: 13px" width="100" class="ml-10 mb-4 mt-n4" flat>
-                Menu
-            </v-btn>
-            <v-btn style="border-radius: 13px" class="ml-10 mb-4 mt-n4" flat
+    <v-card width="100%" height="100%" color="white" class="mx-auto" elevation="0">
+        <div class="d-flex pa-3">
+            <v-spacer></v-spacer>
+            <v-btn 
                 @click="this.$router.push({ name: 'employee' });">
+                <v-icon>mdi-plus</v-icon>
                 Novo Funcionário
             </v-btn>
         </div>
-        <v-card width="95%" height="85%" color="white" class="mx-auto">
-            <v-data-table :items="lstUsers" :headers="headers">
-                <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon class="me-2" size="small" @click="$router.push(`/employee/${item.id}`)">
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon size="small" @click="deleteEmployee(item.id)">
-                        mdi-delete
-                    </v-icon>
-                </template>
-            </v-data-table>
-        </v-card>
-    </div>
+        <v-data-table :items="lstEmployee" :headers="headers">
+            <template v-slot:[`item.actions`]="{ item }">
+                <v-icon class="me-2" size="small" @click="$router.push(`/employee/${item.id}`)">
+                    mdi-pencil
+                </v-icon>
+                <v-icon size="small" @click="deleteEmployee(item.id)">
+                    mdi-delete
+                </v-icon>
+            </template>
+        </v-data-table>
+    </v-card>
 </template>
+
 
 <script>
 import { defineComponent } from "vue";
@@ -56,13 +54,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    background-color: #58af9b;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 </style>

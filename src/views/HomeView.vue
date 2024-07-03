@@ -15,7 +15,6 @@
     <v-col
       cols="3"
     >
-      <div>teste</div>
     </v-col>
   </v-row>
 </template>
