@@ -8,5 +8,6 @@ export default createStore({
         user,
         doctor,
         patient,
+        global,
     },
 })

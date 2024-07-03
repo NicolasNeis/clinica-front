@@ -11,7 +11,7 @@ export default {
     actions: {
         async listAll(store) {
             try {
-                const response = await axiosConfig.get(`api/patient`)
+                const response = await axiosConfig.get(`api/patientE`)
 
                 const lstPatient = response.data.map(el => {
                     el.dateOfBirth = new Date(el.dateOfBirth).toLocaleDateString('pt-BR')
@@ -21,7 +21,12 @@ export default {
                 store.state.lstPatient = lstPatient
                 return response
             } catch (error) {
-                return false
+                this.store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+					color: "red",
+                })
+                return
             }
         },
         async addPatient(store) {
