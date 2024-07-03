@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <AppHeader/>
-    <v-main class="container">
+    <AppHeader v-if="$route.name !== 'login'"/>
+    <LoginView v-if="$route.name === 'login'"/>
+    <v-main class="container" v-if="$route.name !== 'login'">
       <router-view/>
     </v-main>
   </v-app>
@@ -9,6 +10,7 @@
 
 <script>
 import AppHeader from './views/AppHeader.vue';
+import LoginView from './views/LoginView.vue';
 
 export default {
   name: 'App',
@@ -17,7 +19,8 @@ export default {
     //
   }),
   components: {
-    AppHeader // Register the AppHeader component for use in the template
+    AppHeader,
+    LoginView
   }
 }
 </script>

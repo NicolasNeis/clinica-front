@@ -5,20 +5,16 @@
       {{ !doctor.id ? "Cadastro Médico" : "Visualização Médico" }}
     </div>
     <div class="mx-16">
-      <v-text-field label="Nome Completo" class="mt-10 mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="CRM" class="mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="Planos de saúde atendidos" class="mb-n3" variant="outlined"
-        density="compact"></v-text-field>
-      <v-text-field label="Telefone" class="mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="Horário de atendimento" class="mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="Endereço" class="mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="Clínica" class="mb-n3" variant="outlined" density="compact"></v-text-field>
-      <v-text-field label="Especialidade" class="" variant="outlined" density="compact"></v-text-field>
+      <v-text-field v-model="doctor.name" class="mt-10 mb-n3" label="Nome Completo" variant="outlined" density="compact"></v-text-field>
+      <v-text-field v-model="doctor.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
+          density="compact"></v-text-field>
+      <v-text-field v-model="doctor.crm" class=" mb-n3" label="CRM" variant="outlined" density="compact"></v-text-field>
+      <v-text-field v-model="doctor.specialization" class=" mb-n3" label="Especialidade" variant="outlined" density="compact"></v-text-field>
       <div class="w-100 d-flex">
         <v-spacer></v-spacer>
-        <v-btn style="border-radius: 13px" class="" color="#58AF9B" flat>
-          Cadastrar Médico
-        </v-btn>
+        <v-btn style="border-radius: 13px" class="" color="#58AF9B" flat @click="save()">
+            {{ routeId ? "Atualizar Médico" : "Cadastrar Médico"}}
+          </v-btn>
       </div>
     </div>
   </v-card>
@@ -48,13 +44,13 @@ export default defineComponent({
             else
                 response = await this.updateDoctor();
             if(response)
-                this.$router.push({ name: 'employees' });
+                this.$router.push({ name: 'doctors' });
         }
     },
     async mounted() {
-        if (this.$router.currentRoute.value.params.employeeId) {
-            this.routeId = this.$router.currentRoute.value.params.employeeId
-            await this.getDoctor(this.$router.currentRoute.value.params.employeeId);
+        if (this.$router.currentRoute.value.params.doctorId) {
+            this.routeId = this.$router.currentRoute.value.params.doctorId
+            await this.getDoctor(this.$router.currentRoute.value.params.doctorId);
         }
     }
 });

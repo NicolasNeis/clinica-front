@@ -5,9 +5,9 @@
         {{ !patient.id ? "Cadastro Paciente" : "Visualização Paciente" }}
       </div>
       <div class="mx-16">
-        <v-text-field v-model="patient.id" label="Nome Completo" class="mt-10 mb-n3" variant="outlined" :disabled="routeId"
-          density="compact"></v-text-field>
-        <v-text-field v-model="patient.name" label="Nome" class="mb-n3" variant="outlined"
+        <v-text-field v-model="patient.name" label="Nome" class="mt-10 mb-n3" variant="outlined"
+        density="compact"></v-text-field>
+        <v-text-field v-model="patient.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
           density="compact"></v-text-field>
         <v-text-field v-model="patient.cpf" label="CPF" class="mb-n3" variant="outlined"
           density="compact"></v-text-field>
@@ -45,9 +45,13 @@ export default defineComponent({
     ...mapActions('patient', ['updatePatient']),
     ...mapActions('patient', ['getPatient']),
     async save() {
-      const response = await this.addPatient(this.patient);
-      if (response)
-        this.$router.push({ name: 'patients' })
+      let response;
+      if(!this.routeId)
+          response = await this.addPatient();
+      else
+          response = await this.updatePatient();
+      if(response)
+          this.$router.push({ name: 'patients' });
     }
   },
   async mounted() {

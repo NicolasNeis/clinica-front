@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <div class="left-container">
       <div style="background-color: white; border-radius: 40%; margin: 90px; padding: 0px 40px; display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
         <v-img src="..\assets\logo-clinica.png" height="auto" width="auto"></v-img>
@@ -77,7 +77,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container {
+.main-container {
   height: 100vh;
   width: 100vw;
   display: flex;

@@ -5,9 +5,9 @@
             {{ !user.id ? "Cadastro Funcionário" : "Visualização Funcionário" }}
         </div>
         <div class="mx-16">
-            <v-text-field v-model="user.id" label="ID" class="mt-10 mb-n3" variant="outlined" :disabled="routeId"
-                density="compact"></v-text-field>
-            <v-text-field v-model="user.userName" label="Nome" class="mb-n3" variant="outlined"
+            <v-text-field v-model="user.userName" label="Nome" class="mt-10 mb-n3" variant="outlined"
+            density="compact"></v-text-field>
+            <v-text-field v-model="user.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
                 density="compact"></v-text-field>
             <v-text-field v-model="user.password" label="Senha" class="mb-n3" variant="outlined"
                 density="compact"></v-text-field>

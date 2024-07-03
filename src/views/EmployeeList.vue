@@ -8,7 +8,7 @@
                 Novo Funcionário
             </v-btn>
         </div>
-        <v-data-table :items="lstEmployee" :headers="headers">
+        <v-data-table :items="lstUsers" :headers="headers">
             <template v-slot:[`item.actions`]="{ item }">
                 <v-icon class="me-2" size="small" @click="$router.push(`/employee/${item.id}`)">
                     mdi-pencil

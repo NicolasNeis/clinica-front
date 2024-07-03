@@ -13,8 +13,8 @@ export default {
             try {
                 const response = await axiosConfig.get(`api/doctor`)
 
-                store.state.lstDoctor = response
-                return response
+                store.state.lstDoctor = response.data
+                return response.data
             } catch (error) {
                 return
             }

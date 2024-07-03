@@ -31,9 +31,8 @@ export default defineComponent({
         headers: [
             { title: 'ID', value: 'id' },
             { title: 'Nome', value: 'name' },
-            { title: 'Data de Nascimento', key: 'dateOfBirth' },
-            { title: 'Telefone', value: 'phone' },
-            { title: 'CPF', value: 'cpf' },
+            { title: 'CRM', value: 'crm' },
+            { title: 'Especialização', value: 'specialization' },
             { title: 'Ações', key: 'actions', sortable: false },
         ]
     }),
