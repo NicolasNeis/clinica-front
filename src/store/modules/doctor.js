@@ -9,7 +9,7 @@ export default {
     getters: {
     },
     actions: {
-        async listAll(store) {
+        async listAllDoctor(store) {
             try {
                 const response = await axiosConfig.get(`api/doctor`)
 
@@ -69,7 +69,7 @@ export default {
         async deleteDoctor(store, id) {
             try {
                 await axiosConfig.delete(`/api/doctor/${id}`)
-                await store.dispatch("listAll")
+                await store.dispatch("listAllDoctor")
                 return true
             } catch (error) {
                 store.dispatch("global/showSnackBar", {

@@ -40,12 +40,12 @@ export default defineComponent({
         ...mapState('patient', ['lstPatient']),
     },
     methods: {
-        ...mapActions('patient', ['listAll']),
+        ...mapActions('patient', ['listAllPatient']),
         ...mapActions('patient', ['deletePatient']),
 
     },
     async mounted() {
-        await this.listAll();
+        await this.listAllPatient();
     }
 });
 </script>

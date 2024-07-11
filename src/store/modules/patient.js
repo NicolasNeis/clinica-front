@@ -9,10 +9,9 @@ export default {
     getters: {
     },
     actions: {
-        async listAll(store) {
+        async listAllPatient(store) {
             try {
                 const response = await axiosConfig.get(`api/patient`)
-
                 const lstPatient = response.data.map(el => {
                     el.dateOfBirth = new Date(el.dateOfBirth).toLocaleDateString('pt-BR')
                     return el
@@ -75,7 +74,7 @@ export default {
         async deletePatient(store, id) {
             try {
                 await axiosConfig.delete(`/api/patient/${id}`)
-                await store.dispatch("listAll")
+                await store.dispatch("listAllPatient")
                 return true
             } catch (error) {
                 store.dispatch("global/showSnackBar", {

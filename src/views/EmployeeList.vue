@@ -44,11 +44,11 @@ export default defineComponent({
         ...mapState('user', ['lstUsers']),
     },
     methods: {
-        ...mapActions('user', ['listAll']),
+        ...mapActions('user', ['listAllEmployee']),
         ...mapActions('user', ['deleteEmployee']),
     },
     async mounted() {
-        await this.listAll();
+        await this.listAllEmployee();
     }
 });
 </script>

@@ -8,6 +8,7 @@ import DoctorList from '../views/DoctorList.vue'
 import EmployeeList from '../views/EmployeeList.vue'
 import EmployeeForm from '../views/EmployeeForm.vue'
 import SnackBar from '@/views/SnackBar.vue'
+import AppointmentForm from '../views/AppointmentForm.vue'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/employee/:employeeId?',
     name: 'employee',
     component: EmployeeForm, SnackBar
+  },
+  {
+    path: '/appointment/:appointmentId?',
+    name: 'appointment',
+    component: AppointmentForm
   },
 ]
 

@@ -14,10 +14,9 @@ export default {
   },
   getters: {},
   actions: {
-    async listAll(store) {
+    async listAllEmployee(store) {
       try {
         const response = await axiosConfig.get(`api/employee`)
-
         store.state.lstUsers = response.data
         return response
       } catch (error) {
@@ -33,6 +32,7 @@ export default {
       try {
         const response = await axiosConfig.post(`/api/login`, { userName: store.state.userName, password: store.state.password })
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('usuario', response.data.userName)
         axiosConfig.defaults.headers.common["authorization"] = response.data.token;
         store.state.isAuthenticated = true
         return true
@@ -120,7 +120,7 @@ export default {
     async deleteEmployee(store, id) {
       try {
         await axiosConfig.delete(`/api/employee/${id}`)
-        await store.dispatch("listAll")
+        await store.dispatch("listAllEmployee")
         return true
       } catch (error) {
         store.dispatch("global/showSnackBar", {

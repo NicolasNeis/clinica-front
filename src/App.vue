@@ -2,7 +2,7 @@
   <v-app>
     <AppHeader v-if="$route.name !== 'login'"/>
     <LoginView v-if="$route.name === 'login'"/>
-    <v-main class="container" v-if="$route.name !== 'login'">
+    <v-main class="container" :style="[$route.name !== 'home' ? {padding: '20px 30px', marginTop: '64px'} : {}]" v-if="$route.name !== 'login'">
       <router-view/>
       <SnackBar/>
     </v-main>
@@ -37,8 +37,6 @@ html{
 .container {
     height: calc(100vh - 64px);
     width: 100vw;
-    margin-top: 64px;
-    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     background-color: gainsboro;
