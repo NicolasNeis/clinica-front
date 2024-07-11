@@ -1,12 +1,12 @@
 export default {
-    namedspaced: true,
+    namespaced: true,
     state: {
         snackbar:{
 			show: false,
-            loading: false,
 			text: "",
 			color: "red",
-			textColor: "white"
+            loading: false,
+            textColor: "white"
 		},
     },
     mutations: {

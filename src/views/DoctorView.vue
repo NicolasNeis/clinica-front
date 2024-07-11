@@ -86,7 +86,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DoctorView",
-  data: () => ({}),
+  data: () => ({
+    rules: {
+        required: value => !!value || 'Campo obrigatório',
+      },
+  }),
   computed: {},
   methods: {},
 });

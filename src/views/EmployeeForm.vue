@@ -5,12 +5,12 @@
             {{ !user.id ? "Cadastro Funcionário" : "Visualização Funcionário" }}
         </div>
         <div class="mx-16">
-            <v-text-field v-model="user.userName" label="Nome" class="mt-10 mb-n3" variant="outlined"
-            density="compact"></v-text-field>
+            <v-text-field v-model="user.userName" label="Nome" class="mt-10 mb-2" variant="outlined"
+            density="compact" :rules="[rules.required]"></v-text-field>
             <v-text-field v-model="user.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
                 density="compact"></v-text-field>
-            <v-text-field v-model="user.password" label="Senha" class="mb-n3" variant="outlined"
-                density="compact"></v-text-field>
+            <v-text-field v-model="user.password" label="Senha" class="mb-2" variant="outlined"
+                density="compact" :rules="[rules.required]"></v-text-field>
             <v-checkbox v-model="user.role" :false-value="0" :true-value="1" label="Administrador" class="mb-n3" variant="outlined"
                 density="compact"></v-checkbox>
             <div class="w-100 d-flex">
@@ -30,7 +30,10 @@ import { mapState, mapActions } from 'vuex';
 export default defineComponent({
     name: "EmployeeList",
     data: () => ({
-        routeId: null
+        routeId: null,
+        rules: {
+            required: value => !!value || 'Campo obrigatório',
+        },
     }),
     computed: {
         ...mapState('user', ['user']),

@@ -4,6 +4,7 @@
     <LoginView v-if="$route.name === 'login'"/>
     <v-main class="container" v-if="$route.name !== 'login'">
       <router-view/>
+      <SnackBar/>
     </v-main>
   </v-app>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import AppHeader from './views/AppHeader.vue';
 import LoginView from './views/LoginView.vue';
+import SnackBar from './views/SnackBar.vue';
 
 export default {
   name: 'App',
@@ -20,7 +22,8 @@ export default {
   }),
   components: {
     AppHeader,
-    LoginView
+    LoginView,
+    SnackBar
   }
 }
 </script>

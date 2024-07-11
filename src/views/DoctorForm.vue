@@ -5,11 +5,11 @@
       {{ !doctor.id ? "Cadastro Médico" : "Visualização Médico" }}
     </div>
     <div class="mx-16">
-      <v-text-field v-model="doctor.name" class="mt-10 mb-n3" label="Nome Completo" variant="outlined" density="compact"></v-text-field>
+      <v-text-field v-model="doctor.name" class="mt-10 mb-2" label="Nome Completo" variant="outlined" density="compact" :rules="[rules.required]"></v-text-field>
       <v-text-field v-model="doctor.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
           density="compact"></v-text-field>
-      <v-text-field v-model="doctor.crm" class=" mb-n3" label="CRM" variant="outlined" density="compact"></v-text-field>
-      <v-text-field v-model="doctor.specialization" class=" mb-n3" label="Especialidade" variant="outlined" density="compact"></v-text-field>
+      <v-text-field v-model="doctor.crm" class=" mb-2" label="CRM" variant="outlined" density="compact" :rules="[rules.required]" @input="limitInputCRM()"></v-text-field>
+      <v-text-field v-model="doctor.specialization" class=" mb-n3" label="Especialidade" variant="outlined" density="compact" :rules="[rules.required]"></v-text-field>
       <div class="w-100 d-flex">
         <v-spacer></v-spacer>
         <v-btn style="border-radius: 13px" class="" color="#58AF9B" flat @click="save()">
@@ -27,7 +27,10 @@ import { mapState, mapActions } from 'vuex';
 export default defineComponent({
   name: "DoctorForm",
   data: () => ({
-        routeId: null
+        routeId: null,
+        rules: {
+          required: value => !!value || 'Campo obrigatório',
+        },
     }),
     computed: {
         ...mapState('doctor', ['doctor']),
@@ -45,7 +48,12 @@ export default defineComponent({
                 response = await this.updateDoctor();
             if(response)
                 this.$router.push({ name: 'doctors' });
-        }
+        },
+        limitInputCRM() {
+      if (this.doctor.crm.length > 6) {
+        this.doctor.crm = this.doctor.crm.slice(0, 6);
+      }
+    },
     },
     async mounted() {
         if (this.$router.currentRoute.value.params.doctorId) {

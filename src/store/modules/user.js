@@ -21,7 +21,12 @@ export default {
         store.state.lstUsers = response.data
         return response
       } catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
     async login(store) {
@@ -33,7 +38,12 @@ export default {
         return true
       }
       catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
 
     },
@@ -43,7 +53,12 @@ export default {
         store.state.user = response.data
         return true
       } catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
     async signIn(store) {
@@ -54,7 +69,12 @@ export default {
         return true
       }
       catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
     async logout(store) {
@@ -71,7 +91,12 @@ export default {
         }
         return true
       } catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
     async updateEmployee(store) {
@@ -84,7 +109,12 @@ export default {
         }
         return true
       } catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
     async deleteEmployee(store, id) {
@@ -93,7 +123,12 @@ export default {
         await store.dispatch("listAll")
         return true
       } catch (error) {
-        return false
+        store.dispatch("global/showSnackBar", {
+          show: true,
+          text: error,
+          color: "red",
+          loading: true
+      }, {root: true})
       }
     },
   },

@@ -16,7 +16,12 @@ export default {
                 store.state.lstDoctor = response.data
                 return response.data
             } catch (error) {
-                return
+                store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+                    color: "red",
+                    loading: true
+                }, {root: true})
             }
         },
         async addDoctor(store) {
@@ -25,7 +30,12 @@ export default {
                 store.state.doctor = {}
                 return true
             } catch (error) {
-                return false
+                store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+                    color: "red",
+                    loading: true
+                }, {root: true})
             }
         },
         async updateDoctor(store) {
@@ -34,7 +44,12 @@ export default {
                 store.state.doctor = {}
                 return true
             } catch (error) {
-                return false
+                store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+                    color: "red",
+                    loading: true
+                }, {root: true})
             }
         },
         async getDoctor(store, id) {
@@ -43,7 +58,12 @@ export default {
                 store.state.doctor = response.data
                 return true
             } catch (error) {
-                return false
+                store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+                    color: "red",
+                    loading: true
+                }, {root: true})
             }
         },
         async deleteDoctor(store, id) {
@@ -52,7 +72,12 @@ export default {
                 await store.dispatch("listAll")
                 return true
             } catch (error) {
-                return false
+                store.dispatch("global/showSnackBar", {
+                    show: true,
+                    text: error,
+                    color: "red",
+                    loading: true
+                }, {root: true})
             }
         },
     },

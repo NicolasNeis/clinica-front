@@ -7,47 +7,48 @@ import PatientList from '../views/PatientList.vue'
 import DoctorList from '../views/DoctorList.vue'
 import EmployeeList from '../views/EmployeeList.vue'
 import EmployeeForm from '../views/EmployeeForm.vue'
+import SnackBar from '@/views/SnackBar.vue'
 
 const routes = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView, SnackBar
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView, SnackBar
   },
   {
     path: '/patient/:patientId?',
     name: 'patient',
-    component: PatientForm
+    component: PatientForm, SnackBar
   },
   {
     path: '/doctor/:doctorId?',
     name: 'doctor',
-    component: DoctorForm
+    component: DoctorForm, SnackBar
   },
   {
     path: '/patients',
     name: 'patients',
-    component: PatientList
+    component: PatientList, SnackBar
   },
   {
     path: '/doctors',
     name: 'doctors',
-    component: DoctorList
+    component: DoctorList, SnackBar
   },
   {
     path: '/employees',
     name: 'employees',
-    component: EmployeeList
+    component: EmployeeList, SnackBar
   },
   {
     path: '/employee/:employeeId?',
     name: 'employee',
-    component: EmployeeForm
+    component: EmployeeForm, SnackBar
   },
 ]
 
@@ -71,5 +72,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+
 
 export default router

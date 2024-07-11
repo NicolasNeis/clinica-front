@@ -5,16 +5,16 @@
         {{ !patient.id ? "Cadastro Paciente" : "Visualização Paciente" }}
       </div>
       <div class="mx-16">
-        <v-text-field v-model="patient.name" label="Nome" class="mt-10 mb-n3" variant="outlined"
-        density="compact"></v-text-field>
+        <v-text-field v-model="patient.name" label="Nome" class="mt-10 mb-2" variant="outlined"
+        density="compact" :rules="[rules.required]"></v-text-field>
         <v-text-field v-model="patient.id" label="ID" class="mb-n3" variant="outlined" v-if="routeId" :disabled="true"
-          density="compact"></v-text-field>
-        <v-text-field v-model="patient.cpf" label="CPF" class="mb-n3" variant="outlined"
-          density="compact"></v-text-field>
+          density="compact" :rules="[rules.required]"></v-text-field>
+        <v-text-field v-model="patient.cpf" label="CPF" class="mb-2" variant="outlined"
+          density="compact" :rules="[rules.required]" @input="limitInputCPF()"></v-text-field>
         <!-- <v-text-field v-model="patient.dateOfBirth" label="Data de nascimento" class="mb-n3" variant="outlined" density="compact"></v-text-field> -->
 
         <v-text-field v-model="patient.phone" label="Telefone" class="mb-n3" variant="outlined"
-          density="compact"></v-text-field>
+          density="compact" @input="limitInputFone()"></v-text-field>
         <div class="w-100 d-flex">
           <v-spacer></v-spacer>
           <v-btn style="border-radius: 13px" class="" color="#58AF9B" flat @click="save()">
@@ -33,7 +33,10 @@ import { mapState, mapActions } from 'vuex';
 export default defineComponent({
   name: "PatientForm",
   data: () => ({
-    routeId: null
+    routeId: null,
+    rules: {
+        required: value => !!value || 'Campo obrigatório',
+      },
   }),
   components: {
   },
@@ -52,7 +55,17 @@ export default defineComponent({
           response = await this.updatePatient();
       if(response)
           this.$router.push({ name: 'patients' });
-    }
+    },
+    limitInputCPF() {
+      if (this.patient.cpf.length > 11) {
+        this.patient.cpf = this.patient.cpf.slice(0, 11);
+      }
+    },
+    limitInputFone() {
+      if (this.patient.phone.length > 11) {
+        this.patient.phone = this.patient.phone.slice(0, 11);
+      }
+    },
   },
   async mounted() {
     if (this.$router.currentRoute.value.params.patientId) {
